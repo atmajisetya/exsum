@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!--CSS-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/home.css">
 
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
@@ -23,30 +23,51 @@
 <body>
 
     <div class="container">
-        <form>
-            <img src="logo.png">
+        <form method="POST" action="/home/save">
+            <?= csrf_field(); ?>
+            <img src="/img/logo.png">
             <h3 class="text-end fw-normal mt-4">Create your</h3>
             <h3 class="text-end fw-normal"><strong>Account</strong></h3>
             <div class="input-box">
-                <input class="form-control mt-4" type="text" placeholder="Name">
+                <input class="form-control mt-4 <?= ($validation->hasError('user_name')) ?
+                                                    'is-invalid' : ''; ?>" type="text" placeholder="Name" name="user_name" value="<?= old('user_name'); ?>">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('user_name'); ?>
+                </div>
             </div>
             <div class="input-box">
-                <input class="form-control mt-4" type="text" placeholder="Job Position">
+                <input class="form-control mt-4 <?= ($validation->hasError('user_position')) ?
+                                                    'is-invalid' : ''; ?>" type="text" placeholder="Job Position" name="user_position" value="<?= old('user_position'); ?>">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('user_position'); ?>
+                </div>
             </div>
             <div class="input-box">
-                <input class="form-control mt-4" type="email" placeholder="Email">
+                <input class="form-control mt-4 <?= ($validation->hasError('user_email')) ?
+                                                    'is-invalid' : ''; ?>" type="email" placeholder="Email" name="user_email" value="<?= old('user_email'); ?>">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('user_email'); ?>
+                </div>
             </div>
             <div class="input-box">
-                <input class="form-control mt-4" type="password" placeholder="Password">
+                <input class="form-control mt-4 <?= ($validation->hasError('user_password')) ?
+                                                    'is-invalid' : ''; ?>" type="password" placeholder="Password" name="user_password">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('user_password'); ?>
+                </div>
             </div>
             <div class="input-box">
-                <input class="form-control mt-2" type="password" placeholder="Confirm Password">
-            </div>
-            <div class=" mt-4 d-grid gap-2">
-                <button class="btn btn-danger" type="submit">Login</button>
+                <input class="form-control mt-2 <?= ($validation->hasError('confpassword')) ?
+                                                    'is-invalid' : ''; ?>" type="password" placeholder="Confirm Password" name="confpassword">
+                <div class="invalid-feedback">
+                    <?= $validation->getError('confpassword'); ?>
+                </div>
             </div>
             <div class=" mt-2 d-grid gap-2  mb-3">
-                <a href="register.html" class="btn btn-secondary" role="button">Register</a>
+                <input type="submit" class="btn btn-secondary" role="button" value="Register">
+            </div>
+            <div class=" mt-4 d-grid gap-2">
+                <a href="/home" class="btn btn-danger">Login</a>
             </div>
         </form>
     </div>

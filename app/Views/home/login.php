@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!--CSS-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/home.css">
 
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
@@ -23,15 +23,15 @@
 <body>
 
     <div class="container">
-        <form>
-            <img src="logo.png">
+        <form method="POST" action="/home/auth">
+            <img src="/img/logo.png">
             <h3 class="text-end fw-normal mt-4">Procced with your</h3>
             <h3 class="text-end fw-normal"><strong>Login</strong></h3>
             <div class="input-box">
-                <input class="form-control mt-4" type="text" placeholder="Name">
+                <input class="form-control mt-4" type="text" placeholder="Name" name="user_name">
             </div>
             <div class="input-box">
-                <input class="form-control mt-2" type="password" placeholder="Password">
+                <input class="form-control mt-2" type="password" placeholder="Password" name="user_password">
             </div>
             <div class=" mt-4 d-grid gap-2">
                 <button class="btn btn-danger" type="submit">Login</button>
