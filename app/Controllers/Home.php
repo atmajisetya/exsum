@@ -41,8 +41,8 @@ class Home extends BaseController
 					'logged_in'     => TRUE
 				];
 				$session->set($ses_data);
-				dd('Login berhasil');
-				return redirect()->to('/dashboard');
+				session()->setFlashdata('pesan', 'Selamat datang ' . $data['user_name']);
+				return redirect()->to('/project');
 			} else {
 				$session->setFlashdata('msg', 'Password salah');
 				return redirect()->to('/home');
@@ -59,6 +59,7 @@ class Home extends BaseController
 		return redirect()->to('/home');
 	}
 
+	//fungsi untuk menyimpan regiser ke database
 	public function save()
 	{
 		//inlcude helper form
@@ -113,7 +114,7 @@ class Home extends BaseController
 			'user_password' => password_hash($this->request->getVar('user_password'), PASSWORD_DEFAULT),
 			'user_position' => $this->request->getVar('user_position')
 		]);
-		dd("berhasildab");
+		session()->setFlashdata('pesan', 'Akun berhasil dibuat');
 		return redirect()->to('/home');
 	}
 }

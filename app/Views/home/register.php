@@ -26,8 +26,11 @@
         <form method="POST" action="/home/save">
             <?= csrf_field(); ?>
             <img src="/img/logo.png">
+            <h3 class="text-end fw-normal mt-4">Create your <strong>Account</strong></h3>
+            <!--
             <h3 class="text-end fw-normal mt-4">Create your</h3>
             <h3 class="text-end fw-normal"><strong>Account</strong></h3>
+            -->
             <div class="input-box">
                 <input class="form-control mt-4 <?= ($validation->hasError('user_name')) ?
                                                     'is-invalid' : ''; ?>" type="text" placeholder="Name" name="user_name" value="<?= old('user_name'); ?>">

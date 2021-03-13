@@ -25,6 +25,16 @@
     <div class="container">
         <form method="POST" action="/home/auth">
             <img src="/img/logo.png">
+            <?php if (session()->getFlashdata('pesan')) : ?>
+                <div class="alert alert-success mt-4">
+                    <?= session()->getFlashdata('pesan'); ?>
+                </div>
+            <?php endif ?>
+            <?php if (session()->getFlashdata('msg')) : ?>
+                <div class="alert alert-danger mt-4">
+                    <?= session()->getFlashdata('msg'); ?>
+                </div>
+            <?php endif ?>
             <h3 class="text-end fw-normal mt-4">Procced with your</h3>
             <h3 class="text-end fw-normal"><strong>Login</strong></h3>
             <div class="input-box">
