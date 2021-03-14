@@ -1,3 +1,9 @@
+<?php
+$session = session();
+$user_id = $session->get('user_id');
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -81,49 +87,57 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form>
+                        <!-- form untuk menambahkan project -->
+                        <form method="POST" action="/project/save">
+                            <?= csrf_field(); ?>
+                            <input type="hidden" name="created_by" value="<?= $user_id; ?>">
                             <div class="mb-1">
                                 <label for="project-name" class="col-form-label">Project Name :</label>
-                                <input type="text" class="form-control" id="project-name">
+                                <input type="text" class="form-control" id="project-name" name="project_name" value="<?= old('project_name'); ?>" required>
                             </div>
-                            <div class="mb-1">
+                            <div class=" mb-1">
                                 <label for="project-manager" class="col-form-label">Project Manager :</label>
-                                <input type="text" class="form-control" id="project-manager">
+                                <input type="text" class="form-control" id="project-manager" name="project_manager" value="<?= old('project_manager'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="description" class="col-form-label">Description :</label>
-                                <input type="text" class="form-control" id="description">
+                                <input type="text" class="form-control" id="description" name="project_description" value="<?= old('project_description'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="activity" class="col-form-label">Activity :</label>
-                                <input type="text" class="form-control" id="activity">
+                                <input type="text" class="form-control" id="activity" name="project_kegiatan" value="<?= old('project_kegiatan'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="tanggal-mulai" class="col-form-label">Start Date :</label>
-                                <input type="text" class="form-control" id="tanggal-mulai">
+                                <input type="text" class="form-control" id="tanggal-mulai" name="project_startdate" value="<?= old('project_startdate'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="tanggal-selesai" class="col-form-label">Target Finish :</label>
-                                <input type="text" class="form-control" id="tanggal-selesai">
+                                <input type="text" class="form-control" id="tanggal-selesai" name="project_finishtarget" value="<?= old('project_finishtarget'); ?>" required>
                             </div>
                             <div class="mb-1">
-                                <label for="unit-terlibat" class="col-form-label">Stackeholders :</label>
-                                <input type="text" class="form-control" id="unit-terlibat">
-                            </div>
-                            <div class="mb-1">
-                                <label for="progress" class="col-form-label">Progress :</label>
-                                <input type="text" class="form-control" id="progress">
+                                <label for="unit-terlibat" class="col-form-label">Stakeholders :</label>
+                                <input type="text" class="form-control" id="unit-terlibat" name="project_stakeholders" value="<?= old('project_stakeholders'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="resource" class="col-form-label">Resource :</label>
-                                <input type="text" class="form-control" id="resource">
+                                <input type="text" class="form-control" id="resource" name="project_resource" value="<?= old('project_resource'); ?>" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="progress" class="col-form-label">Progress :</label>
+                                <input type="number" class="form-control" id="progress" name="project_progress" value="<?= old('project_progess'); ?>" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="status" class="col-form-label">Status :</label>
+                                <input type="text" class="form-control" id="status" name="project_status" value="<?= old('project_status'); ?>" required>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-danger">Add</button>
                             </div>
                         </form>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-danger">Add</button>
-                    </div>
+
                 </div>
             </div>
         </div>
