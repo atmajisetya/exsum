@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/project', 'Project::index', ['filter' => 'auth']);
 $routes->get('/project/index', 'Project::index', ['filter' => 'auth']);
+$routes->delete('/project/(:num)', 'Project::delete/$1');
 
 /*
  * --------------------------------------------------------------------

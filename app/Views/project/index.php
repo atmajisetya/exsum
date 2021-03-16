@@ -18,18 +18,18 @@ $user_id = $session->get('user_id');
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 
     <!--CSS-->
-    <link rel="stylesheet" href="/css/styledashboard.css">
+    <link rel="stylesheet" href="/css/styledashbord.css">
 
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
-    <title>Dashbord | Executive Summary</title>
+    <title>Project | Executive Summary</title>
 </head>
 
 <body>
 
     <!--NAVBAR-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
             <img src="/img/logo.png">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,27 +38,27 @@ $user_id = $session->get('user_id');
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Project</a>
+                        <a class="nav-link" href="/project">Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Operation Management</a>
+                        <a class="nav-link" href="om.html">Operation Management</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Activity Report</a>
+                        <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Activity Plan</a>
+                        <a class="nav-link" href="actplan.html">Activity Plan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Chart Generator</a>
                     </li>
                 </ul>
                 <div class="dropdown ms-auto">
-                    <button class="btn-danger dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="user dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="fas fa-user-circle fa-2x"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="#"><?= session()->get('user_name'); ?></a></li>
+                        <li><a class="dropdown-item" href="accountinfo.html"><?= session()->get('user_name'); ?></a></li>
                         <li><a class="dropdown-item" href="/home/logout">Logout</a></li>
                     </ul>
                 </div>
@@ -71,7 +71,6 @@ $user_id = $session->get('user_id');
             <?= session()->getFlashdata('pesan'); ?>
         </div>
     <?php endif ?>
-
 
     <!--Tambah Project-->
     <section id="tambahProject">
@@ -137,14 +136,13 @@ $user_id = $session->get('user_id');
                             </div>
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </section>
 
     <div>
-        <h1 class="text-end">
+        <h1 class="text-end mb-3">
             <strong>Project</strong>
         </h1>
     </div>
@@ -152,42 +150,31 @@ $user_id = $session->get('user_id');
 
     <!--Tabel-->
     <div class="displayProject">
-        <div class="row">
-            <div class="crud-option">
-                <button type="button" class="btn btn-light me-3" data-bs-dismiss="#">Edit</button>
-                <button type="reset" class="btn btn-light" data-bs-dismiss="#">Delete</button>
-            </div>
+        <div class="row-content">
             <div class="table-content">
-                <table class="table table-striped">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th scope="col">Project</th>
                             <th scope="col">Description</th>
                             <th scope="col">Activity</th>
-                            <th scope="col">Finish at</th>
+                            <th scope="col">Target Finish</th>
+                            <th scope="col">Problem</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">Finest Telin</th>
-                            <td>Implementasi imprest fund di Telin dengan FINEST</td>
-                            <td>Develop Aplikasi</td>
-                            <td>2019</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">SMART</th>
-                            <td>Aplikasi Monitoring Invoice Dokumen</td>
-                            <td>Develop Apliasi</td>
-                            <td>2019</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">FINEC</th>
-                            <td>Tools sebagai integrator antara tools SIMPKBL pada unit CDC
-                                dengan FINST khusus antara pertanggungan bina lingkungan
-                            </td>
-                            <td>Develop Aplikasi</td>
-                            <td>2019</td>
-                        </tr>
+                        <?php foreach ($project as $p) : ?>
+                            <tr>
+                                <th scope="row">
+                                    <a href="/project/detail/<?= $p['id']; ?>"><?= $p['project_name']; ?></a>
+                                </th>
+                                <td><?= $p['project_description']; ?></td>
+                                <td><?= $p['project_kegiatan']; ?></td>
+                                <td><?= $p['project_finishtarget']; ?></td>
+                                <td><?= $p['project_problem']; ?></td>
+                            </tr>
+                        <?php endforeach ?>
                     </tbody>
                 </table>
             </div>

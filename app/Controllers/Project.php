@@ -13,7 +13,33 @@ class Project extends BaseController
     }
     public function index()
     {
-        return view('project/index');
+        $session = session();
+        //ambil id user
+        $user_id = $session->get('user_id');
+
+        $data = [
+            'project' => $this->projectModel->getProject($user_id)
+        ];
+        return view('project/index', $data);
+    }
+
+    //menampilkan detail proyek
+    public function detail($id)
+    {
+
+        $data = [
+            'project' => $this->projectModel->detailProject($id)
+        ];
+        return view('project/detail', $data);
+    }
+
+    //menghapus proyek
+    public function delete($project_id)
+    {
+        //dd('bakalan hapus dab');
+        $this->projectModel->delete($project_id);
+        session()->setFlashdata('pesan', 'Proyek berhasil dihapus');
+        return redirect()->to('/project');
     }
 
     //fungsi untuk menyimpan regiser ke database
@@ -113,5 +139,21 @@ class Project extends BaseController
         ]);
         session()->setFlashdata('pesan', 'Proyek berhasil dibuat');
         return redirect()->to('/project');
+    }
+    public function update($id)
+    {
+        //inlcude helper form
+        helper('form');
+
+        //menggunakan method save
+        //jika disertakan id, CI udah tau kalau yang dimaksud update buka save
+        $this->projectModel->save([
+            'id' => $id,
+            'project_progress' => $this->request->getVar('project_progress'),
+            'project_status' => $this->request->getVar('project_status'),
+            'project_problem' => $this->request->getVar('project_problem')
+        ]);
+        session()->setFlashdata('pesan', 'Data berhasil diubah');
+        return redirect()->to('/project/detail/' . $id);
     }
 }

@@ -1,0 +1,157 @@
+*{
+    padding :0;
+    margin: 0;
+    box-sizing: border-box;
+}
+img{
+    max-width: 120px;
+}
+.navbar{
+    background: rgb(179, 7, 7);
+    padding-left: 10px;
+    padding-right: 50px;
+    border-bottom: 1px solid red;
+    border-end-start-radius: 10px;
+    border-end-end-radius: 10px;
+}
+
+
+.navbar-nav li a{
+font-weight: 600;
+float: right;
+text-align: left;
+}
+
+.navbar-nav li{
+    font-size: 20px;
+    border-left: 1px solid lightgray;
+    line-height: 5px;
+    padding: 0 20px;
+}
+
+#tambahProject{
+    width: fit-content;
+    margin-top: 50px;
+    margin-left: 100px;
+}
+
+.btn{
+    padding: 10px;
+    color: black;
+    box-shadow: 1px 0 20px 0 lightgray;
+    border-radius: 10px;
+}
+
+.displayProject{
+    width: 90%;
+    margin: auto;
+}
+
+thead{
+    font-size: 20px;
+    text-align: center;
+}
+.table-content{
+    margin-top: 20px;
+}
+.far{
+    color: lightgray;
+}
+
+#dropdownMenuButton1{
+    margin-right: 50px;
+    padding: 5px;
+    border: none;
+    border-radius: 10px;
+}
+
+.dropdown-item{
+    font-size: 20px;
+}
+
+h1{
+    font-size: 50px;
+    margin-right: 120px;
+}
+
+/* h2{
+    font-size: 50px;
+} */
+
+.container{
+    width: fit-content;
+    margin-top: 40px;
+}
+#info{
+    box-shadow: 1px 0 20px 0 lightgray;
+    border-radius: 30px;
+    margin: auto;
+    padding: 50px 0px 50px 50px;
+}
+
+.row-content{
+    box-shadow: 1px 0 20px 0 lightgray;
+    border-radius: 30px;
+    margin: auto;
+    padding: 50px;
+}
+
+.col-5{
+    width: 350px;
+    margin-left: 70px;
+    border-left: 1px solid lightgray;
+}
+
+.col-6{
+    width: 50%;
+}
+
+.simpan{
+    border: none;
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+}
+
+.user{
+    color: white;
+    background:  rgb(179, 7, 7); ;
+}
+
+.detailProject{
+    color: black;
+    text-decoration: none;
+}
+
+.displayProject-detail{
+    width: 90%;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+#frame-luar{
+    border-radius: 10px;
+    width: 55%;
+    border: 1px solid red;
+    margin: auto;
+}
+
+#ex{
+    width: 30%;
+
+}
+
+.judul{
+    border-bottom: 1px solid red;
+    background: red;
+    color: white;
+}
+
+.desc{
+    border-bottom: 1px solid red;
+}
+
+#detail-project{
+    padding-bottom: 10px;
+}
