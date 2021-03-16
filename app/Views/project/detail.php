@@ -14,6 +14,42 @@
     <!--CSS-->
     <link rel="stylesheet" href="/css/styledashbord.css">
 
+    <!-- google chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            <?php
+            $progress = $project['project_progress'];
+            $remaining = 100 - $progress;
+
+            ?>
+
+            var data = google.visualization.arrayToDataTable([
+                ['Completion', 'Percentage'],
+                ['Completed', <?= $progress ?>],
+                ['Remaining', <?= $remaining; ?>]
+            ]);
+
+            var options = {
+                title: 'Project Progress'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+
+
+
+
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
@@ -35,7 +71,7 @@
                         <a class="nav-link" href="/project">Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="om.html">Operation Management</a>
+                        <a class="nav-link" href="/om">Operation Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
@@ -111,7 +147,7 @@
                 </div>
 
                 <div class="text-center mt-2">
-                    <img src="/img/logo.png" id="ex">
+                    <div id="piechart" style="width: 700px; height: 300px;"></div>
                 </div>
 
                 <div class="mt-5">
@@ -136,15 +172,15 @@
                                     <form action="/project/update/<?= $project['id']; ?>" method="POST">
                                         <div class="mb-1">
                                             <label for="project" class="col-form-label">Status:</label>
-                                            <input type="text" class="form-control" id="project" name="project_status">
+                                            <input type="text" class="form-control" id="project" name="project_status" value="<?= $project['project_status']; ?>">
                                         </div>
                                         <div class="mb-1">
                                             <label for="progress" class="col-form-label">Progress :</label>
-                                            <input type="number" class="form-control" id="progress" name="project_progress">
+                                            <input type="number" class="form-control" id="progress" name="project_progress" value="<?= $project['project_progress']; ?>">
                                         </div>
                                         <div class="mb-1">
                                             <label for="problem" class="col-form-label">Kendala :</label>
-                                            <input type="text" class="form-control" id="problem" name="project_problem">
+                                            <input type="text" class="form-control" id="problem" name="project_problem" value="<?= $project['project_problem']; ?>">
                                         </div>
 
                                         <div class="modal-footer">

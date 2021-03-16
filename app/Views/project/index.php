@@ -41,7 +41,7 @@ $user_id = $session->get('user_id');
                         <a class="nav-link" href="/project">Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="om.html">Operation Management</a>
+                        <a class="nav-link" href="/om">Operation Management</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
