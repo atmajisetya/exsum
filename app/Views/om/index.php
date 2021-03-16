@@ -23,7 +23,7 @@ $user_id = $session->get('user_id');
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
-    <title>Project | Executive Summary</title>
+    <title>Operation Management | Executive Summary</title>
 </head>
 
 <body>
@@ -50,10 +50,7 @@ $user_id = $session->get('user_id');
                         <a class="nav-link" href="actplan.html">Activity Plan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="genreport.html">Generate Report</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/lesson">Lesson Learned</a>
+                        <a class="nav-link" href="#">Chart Generator</a>
                     </li>
                 </ul>
                 <div class="dropdown ms-auto">
@@ -68,70 +65,49 @@ $user_id = $session->get('user_id');
             </div>
         </div>
     </nav>
-
     <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success mt-4">
             <?= session()->getFlashdata('pesan'); ?>
         </div>
     <?php endif ?>
 
-    <!--Tambah Project-->
+    <!--Tambah OM-->
     <section id="tambahProject">
         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buatProject" data-bs-whatever="@mdo">
             <i class="fas fa-plus"></i>
-            <p>New Project</p>
+            <p>New OM</p>
         </button>
         <div class="modal fade" id="buatProject" tabindex="-1" aria-labelledby="buatProjectLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="buatProjectLabel">New Project</h5>
+                        <h5 class="modal-title" id="buatProjectLabel">New OM</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <!-- form untuk menambahkan project -->
-                        <form method="POST" action="/project/save">
+                        <!-- tambah om -->
+                        <form method="POST" action="/om/save">
                             <?= csrf_field(); ?>
                             <input type="hidden" name="created_by" value="<?= $user_id; ?>">
                             <div class="mb-1">
-                                <label for="project-name" class="col-form-label">Project Name :</label>
-                                <input type="text" class="form-control" id="project-name" name="project_name" value="<?= old('project_name'); ?>" required>
-                            </div>
-                            <div class=" mb-1">
-                                <label for="project-manager" class="col-form-label">Project Manager :</label>
-                                <input type="text" class="form-control" id="project-manager" name="project_manager" value="<?= old('project_manager'); ?>" required>
+                                <label for="activity" class="col-form-label">Activity:</label>
+                                <input type="text" class="form-control" id="activity" name="om_activities" required>
                             </div>
                             <div class="mb-1">
-                                <label for="description" class="col-form-label">Description :</label>
-                                <input type="text" class="form-control" id="description" name="project_description" value="<?= old('project_description'); ?>" required>
+                                <label for="description" class="col-form-label">Description:</label>
+                                <input type="text" class="form-control" id="description" name="om_description" required>
                             </div>
                             <div class="mb-1">
-                                <label for="activity" class="col-form-label">Activity :</label>
-                                <input type="text" class="form-control" id="activity" name="project_kegiatan" value="<?= old('project_kegiatan'); ?>" required>
+                                <label for="category" class="col-form-label">Category:</label>
+                                <input type="text" class="form-control" id="category" name="om_category" required>
                             </div>
                             <div class="mb-1">
-                                <label for="tanggal-mulai" class="col-form-label">Start Date :</label>
-                                <input type="text" class="form-control" id="tanggal-mulai" name="project_startdate" value="<?= old('project_startdate'); ?>" required>
+                                <label for="person" class="col-form-label">Person in Charge :</label>
+                                <input type="text" class="form-control" id="person" name="om_pic" required>
                             </div>
                             <div class="mb-1">
-                                <label for="tanggal-selesai" class="col-form-label">Target Finish :</label>
-                                <input type="text" class="form-control" id="tanggal-selesai" name="project_finishtarget" value="<?= old('project_finishtarget'); ?>" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="unit-terlibat" class="col-form-label">Stakeholders :</label>
-                                <input type="text" class="form-control" id="unit-terlibat" name="project_stakeholders" value="<?= old('project_stakeholders'); ?>" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="resource" class="col-form-label">Resource :</label>
-                                <input type="text" class="form-control" id="resource" name="project_resource" value="<?= old('project_resource'); ?>" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="progress" class="col-form-label">Progress :</label>
-                                <input type="number" class="form-control" id="progress" name="project_progress" value="<?= old('project_progess'); ?>" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="status" class="col-form-label">Status :</label>
-                                <input type="text" class="form-control" id="status" name="project_status" value="<?= old('project_status'); ?>" required>
+                                <label for="period" class="col-form-label">Period:</label>
+                                <input type="text" class="form-control" id="period" name="om_period" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -146,7 +122,7 @@ $user_id = $session->get('user_id');
 
     <div>
         <h1 class="text-end mb-3">
-            <strong>Project</strong>
+            <strong>Operation Management</strong>
         </h1>
     </div>
 
@@ -158,24 +134,22 @@ $user_id = $session->get('user_id');
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">Project</th>
-                            <th scope="col">Description</th>
+                            <th scope="col">No</th>
                             <th scope="col">Activity</th>
-                            <th scope="col">Target Finish</th>
-                            <th scope="col">Problem</th>
-
+                            <th scope="col">Person in Charge</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($project as $p) : ?>
+                        <?php $i = 1; ?>
+                        <?php foreach ($om as $p) : ?>
                             <tr>
-                                <th scope="row">
-                                    <a class="detailProject" href="/project/detail/<?= $p['id']; ?>"><?= $p['project_name']; ?></a>
-                                </th>
-                                <td><?= $p['project_description']; ?></td>
-                                <td><?= $p['project_kegiatan']; ?></td>
-                                <td><?= $p['project_finishtarget']; ?></td>
-                                <td><?= $p['project_problem']; ?></td>
+                                <th scope="row"><?= $i++; ?></th>
+                                <td><?= $p['om_activities']; ?></td>
+                                <td><?= $p['om_pic']; ?></td>
+                                <td>
+                                    <button type="button" class="btn btn-light me-3" data-bs-dismiss="#">Update</button>
+                                    <button type="reset" class="btn btn-light" data-bs-dismiss="#">Delete</button>
+                                </td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>
