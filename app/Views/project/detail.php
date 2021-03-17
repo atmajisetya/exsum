@@ -80,7 +80,10 @@
                         <a class="nav-link" href="actplan.html">Activity Plan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Chart Generator</a>
+                        <a class="nav-link" href="/report">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/lesson">Lesson Learned</a>
                     </li>
                 </ul>
                 <div class="dropdown ms-auto">

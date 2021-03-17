@@ -24,4 +24,8 @@ class ProjectModel extends Model
     {
         return $this->where(['id' => $id])->first();
     }
+    public function getAllProject()
+    {
+        return $this->findAll();
+    }
 }
