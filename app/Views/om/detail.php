@@ -14,46 +14,10 @@
     <!--CSS-->
     <link rel="stylesheet" href="/css/styledashbord.css">
 
-    <!-- google chart -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-        google.charts.load('current', {
-            'packages': ['corechart']
-        });
-        google.charts.setOnLoadCallback(drawChart);
-
-        function drawChart() {
-
-            <?php
-            $progress = $project['project_progress'];
-            $remaining = 100 - $progress;
-
-            ?>
-
-            var data = google.visualization.arrayToDataTable([
-                ['Completion', 'Percentage'],
-                ['Completed', <?= $progress ?>],
-                ['Remaining', <?= $remaining; ?>]
-            ]);
-
-            var options = {
-                title: 'Project Progress'
-            };
-
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-
-            chart.draw(data, options);
-        }
-    </script>
-
-
-
-
-
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
-    <title>Project | Executive Summary</title>
+    <title>Detail OM | Executive Summary</title>
 </head>
 
 <body>
@@ -61,7 +25,7 @@
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <img src="/img/logo.png">
+            <img src="/img/logo_2.png">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -101,17 +65,7 @@
             </div>
         </div>
     </nav>
-
-    <div class="container">
-        <div>
-            <h2 class="text-center">
-                <strong>
-                    Project
-                </strong>
-            </h2>
-        </div>
-    </div>
-    <!-- menampilkan flash message ketika project diubah -->
+    <!-- menampilkan flash message ketika OM diubah -->
     <?php if (session()->getFlashdata('pesan')) : ?>
         <div class="alert alert-success mt-4">
             <?= session()->getFlashdata('pesan'); ?>
@@ -119,31 +73,39 @@
     <?php endif ?>
 
     <div class="container">
+        <div>
+            <h2 class="text-center">
+                <strong>
+                    Operational Management
+                </strong>
+            </h2>
+        </div>
+    </div>
+
+    <div class="container">
         <div class="row" id="frame-luar">
             <div class="judul">
                 <h3 class="text-center">
                     <strong>
-                        <?= $project['project_name']; ?>
+                        <?= $om['om_activities']; ?>
                     </strong>
                 </h3>
             </div>
             <div class="desc text-center mt-2 mb-4">
                 <h4>
-                    <?= $project['project_description']; ?>
+                    <?= $om['om_description']; ?>
                 </h4>
             </div>
             <div class="row" id="detail-project">
                 <div class="col-4">
-                    <p>Project Manager :</p>
-                    <p>Start :</p>
-                    <p>Target Finish :</p>
-                    <p>Resource :</p>
+                    <p>Category :</p>
+                    <p>PIC :</p>
+                    <p>Period :</p>
                 </div>
                 <div class="col-4">
-                    <p><?= $project['project_manager']; ?></p>
-                    <p><?= $project['project_startdate']; ?></p>
-                    <p><?= $project['project_finishtarget']; ?></p>
-                    <p><?= $project['project_resource']; ?></p>
+                    <p><?= $om['om_category']; ?></p>
+                    <p><?= $om['om_pic']; ?></p>
+                    <p><?= $om['om_period']; ?></p>
                 </div>
 
                 <div>
@@ -153,70 +115,64 @@
                 </div>
 
                 <div class="text-center mt-2">
-                    <div id="piechart" style="width: 700px; height: 300px;"></div>
+                    <img src="logo.png" id="ex">
                 </div>
 
                 <div class="mt-5">
                     <h6>
                         Status :
                     </h6>
-                    <?= $project['project_status']; ?>
+                    <?= $om['om_status']; ?>
                 </div>
 
                 <div class="mt-5">
                     <button type="button" class="btn btn-light me-3 text-start" data-bs-toggle="modal" data-bs-target="#editProfil" data-bs-whatever="@mdo">
-                        Edit Project
+                        Update
                     </button>
                     <div class="modal fade" id="editProfil" tabindex="-1" aria-labelledby="editProfilLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editProfilLabel">Edit Project</h5>
+                                    <h5 class="modal-title" id="editProfilLabel">Update Project</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/project/update/<?= $project['id']; ?>" method="POST">
+                                    <form method="POST" action="/om/update/<?= $om['id']; ?>">
+                                        <?= csrf_field(); ?>
                                         <div class="mb-1">
-                                            <label for="project" class="col-form-label">Status:</label>
-                                            <input type="text" class="form-control" id="project" name="project_status" value="<?= $project['project_status']; ?>">
+                                            <label for="activity" class="col-form-label">Activity:</label>
+                                            <input type="text" class="form-control" id="activity" name="om_activities" required value="<?= $om['om_activities']; ?>">
                                         </div>
                                         <div class="mb-1">
-                                            <label for="progress" class="col-form-label">Progress :</label>
-                                            <input type="number" class="form-control" id="progress" name="project_progress" value="<?= $project['project_progress']; ?>">
+                                            <label for="description" class="col-form-label">Description:</label>
+                                            <input type="text" class="form-control" id="description" name="om_description" required value="<?= $om['om_description']; ?>">
                                         </div>
                                         <div class="mb-1">
-                                            <label for="problem" class="col-form-label">Kendala :</label>
-                                            <input type="text" class="form-control" id="problem" name="project_problem" value="<?= $project['project_problem']; ?>">
+                                            <label for="category" class="col-form-label">Category:</label>
+                                            <input type="text" class="form-control" id="category" name="om_category" required value="<?= $om['om_category']; ?>">
                                         </div>
-
+                                        <div class="mb-1">
+                                            <label for="person" class="col-form-label">Person in Charge :</label>
+                                            <input type="text" class="form-control" id="person" name="om_pic" required value="<?= $om['om_pic']; ?>">
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="period" class="col-form-label">Period :</label>
+                                            <input type="text" class="form-control" id="period" name="om_period" required value="<?= $om['om_period']; ?>">
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="status" class="col-form-label">Status :</label>
+                                            <input type="text" class="form-control" id="status" name="om_status" required value="<?= $om['om_status']; ?>">
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-danger">Save</button>
                                         </div>
-                                        <!--
-                                        <div class="mb-1">
-                                            <label for="description" class="col-form-label">Description :</label>
-                                            <input type="text" class="form-control" id="objective">
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="targerFinish" class="col-form-label">Targer Finish :</label>
-                                            <input type="text" class="form-control" id="targerFinish">
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="problem" class="col-form-label">Problem :</label>
-                                            <input type="text" class="form-control" id="problem">
-                                        </div>
-                                        -->
                                     </form>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <button type="reset" class="btn btn-light" data-bs-dismiss="#">Delete</button>
-                    -->
-                    <form action="/project/<?= $project['id']; ?>" method="POST" class="d-inline">
+                    <form action="/om/<?= $om['id']; ?>" method="POST" class="d-inline">
                         <?= csrf_field(); ?>
                         <input type="hidden" name="_method" value="DELETE">
                         <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Delete</button>

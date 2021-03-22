@@ -28,4 +28,8 @@ class ProjectModel extends Model
     {
         return $this->findAll();
     }
+    public function projectSuccess()
+    {
+        return $this->where(['project_progress' => 100])->findAll();
+    }
 }

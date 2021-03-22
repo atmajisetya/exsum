@@ -1,3 +1,12 @@
+<?php
+
+
+$session = session();
+$user_id = $session->get('user_id');
+
+
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -53,7 +62,7 @@
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
-    <title>Project | Executive Summary</title>
+    <title>Success Stories | Executive Summary</title>
 </head>
 
 <body>
@@ -111,12 +120,6 @@
             </h2>
         </div>
     </div>
-    <!-- menampilkan flash message ketika project diubah -->
-    <?php if (session()->getFlashdata('pesan')) : ?>
-        <div class="alert alert-success mt-4">
-            <?= session()->getFlashdata('pesan'); ?>
-        </div>
-    <?php endif ?>
 
     <div class="container">
         <div class="row" id="frame-luar">
@@ -165,62 +168,47 @@
 
                 <div class="mt-5">
                     <button type="button" class="btn btn-light me-3 text-start" data-bs-toggle="modal" data-bs-target="#editProfil" data-bs-whatever="@mdo">
-                        Edit Project
+                        Create Lesson Learned
                     </button>
                     <div class="modal fade" id="editProfil" tabindex="-1" aria-labelledby="editProfilLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editProfilLabel">Edit Project</h5>
+                                    <h5 class="modal-title" id="editProfilLabel">Lesson Learned</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="/project/update/<?= $project['id']; ?>" method="POST">
+                                    <!-- menambahkan lesson -->
+                                    <form method="POST" action="/lesson/save">
+                                        <?= csrf_field(); ?>
+                                        <input type="hidden" name="created_by" value="<?= $user_id; ?>">
+                                        <input type="hidden" name="project" value="<?= $project['id']; ?>">
                                         <div class="mb-1">
-                                            <label for="project" class="col-form-label">Status:</label>
-                                            <input type="text" class="form-control" id="project" name="project_status" value="<?= $project['project_status']; ?>">
+                                            <label for="issues" class="col-form-label">Issues : </label>
+                                            <input type="text" class="form-control" id="issues" name="lesson_issue" required>
                                         </div>
                                         <div class="mb-1">
-                                            <label for="progress" class="col-form-label">Progress :</label>
-                                            <input type="number" class="form-control" id="progress" name="project_progress" value="<?= $project['project_progress']; ?>">
+                                            <label for="solution" class="col-form-label">Solution :</label>
+                                            <input type="text" class="form-control" id="solution" name="lesson_solution" required>
                                         </div>
                                         <div class="mb-1">
-                                            <label for="problem" class="col-form-label">Kendala :</label>
-                                            <input type="text" class="form-control" id="problem" name="project_problem" value="<?= $project['project_problem']; ?>">
+                                            <label for="actionPlan" class="col-form-label">Action Plan :</label>
+                                            <input type="text" class="form-control" id="actionPlan" name="lesson_action" required>
                                         </div>
-
+                                        <div class="mb-1">
+                                            <label for="actionPlan" class="col-form-label">Period :</label>
+                                            <input type="text" class="form-control" id="actionPlan" name="lesson_period" required>
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-danger">Save</button>
+                                            <button type="submit" class="btn btn-danger">Add</button>
                                         </div>
-                                        <!--
-                                        <div class="mb-1">
-                                            <label for="description" class="col-form-label">Description :</label>
-                                            <input type="text" class="form-control" id="objective">
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="targerFinish" class="col-form-label">Targer Finish :</label>
-                                            <input type="text" class="form-control" id="targerFinish">
-                                        </div>
-                                        <div class="mb-1">
-                                            <label for="problem" class="col-form-label">Problem :</label>
-                                            <input type="text" class="form-control" id="problem">
-                                        </div>
-                                        -->
                                     </form>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-                    <!--
-                    <button type="reset" class="btn btn-light" data-bs-dismiss="#">Delete</button>
-                    -->
-                    <form action="/project/<?= $project['id']; ?>" method="POST" class="d-inline">
-                        <?= csrf_field(); ?>
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Delete</button>
-                    </form>
                 </div>
 
             </div>

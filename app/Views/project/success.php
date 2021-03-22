@@ -23,7 +23,7 @@ $user_id = $session->get('user_id');
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
-    <title>Operation Management | Executive Summary</title>
+    <title>Success Stories | Executive Summary</title>
 </head>
 
 <body>
@@ -31,7 +31,7 @@ $user_id = $session->get('user_id');
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <img src="/img/logo.png">
+            <img src="/img/logo_2.png">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -71,68 +71,10 @@ $user_id = $session->get('user_id');
             </div>
         </div>
     </nav>
-    <?php if (session()->getFlashdata('pesan')) : ?>
-        <div class="alert alert-success mt-4">
-            <?= session()->getFlashdata('pesan'); ?>
-        </div>
-    <?php endif ?>
-
-    <!--Tambah OM-->
-    <section id="tambahProject">
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buatProject" data-bs-whatever="@mdo">
-            <i class="fas fa-plus"></i>
-            <p>New OM</p>
-        </button>
-        <div class="modal fade" id="buatProject" tabindex="-1" aria-labelledby="buatProjectLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="buatProjectLabel">New OM</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- tambah om -->
-                        <form method="POST" action="/om/save">
-                            <?= csrf_field(); ?>
-                            <input type="hidden" name="created_by" value="<?= $user_id; ?>">
-                            <div class="mb-1">
-                                <label for="activity" class="col-form-label">Activity:</label>
-                                <input type="text" class="form-control" id="activity" name="om_activities" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="description" class="col-form-label">Description:</label>
-                                <input type="text" class="form-control" id="description" name="om_description" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="category" class="col-form-label">Category:</label>
-                                <input type="text" class="form-control" id="category" name="om_category" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="person" class="col-form-label">Person in Charge :</label>
-                                <input type="text" class="form-control" id="person" name="om_pic" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="period" class="col-form-label">Period:</label>
-                                <input type="text" class="form-control" id="period" name="om_period" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="period" class="col-form-label">Status:</label>
-                                <input type="text" class="form-control" id="status" name="om_status" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <div>
         <h1 class="text-end mb-3">
-            <strong>Operation Management</strong>
+            <strong>Success Stories</strong>
         </h1>
     </div>
 
@@ -144,20 +86,22 @@ $user_id = $session->get('user_id');
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col">No</th>
+                            <th scope="col">Project</th>
+                            <th scope="col">Description</th>
                             <th scope="col">Activity</th>
-                            <th scope="col">Person in Charge</th>
+                            <th scope="col">Finished</th>
+
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $i = 1; ?>
-                        <?php foreach ($om as $p) : ?>
+                        <?php foreach ($project as $p) : ?>
                             <tr>
                                 <th scope="row">
-                                    <a class="detailProject" href="/om/detail/<?= $p['id']; ?>"><?= $i++; ?></a>
+                                    <a class="detailProject" href="/project/detailSuccess/<?= $p['id']; ?>"><?= $p['project_name']; ?></a>
                                 </th>
-                                <td><?= $p['om_activities']; ?></td>
-                                <td><?= $p['om_pic']; ?></td>
+                                <td><?= $p['project_description']; ?></td>
+                                <td><?= $p['project_kegiatan']; ?></td>
+                                <td><?= $p['updated_at']; ?></td>
                             </tr>
                         <?php endforeach ?>
                     </tbody>

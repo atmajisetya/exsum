@@ -1,6 +1,9 @@
 <?php
+
+
 $session = session();
 $user_id = $session->get('user_id');
+
 
 ?>
 <!doctype html>
@@ -46,10 +49,13 @@ $user_id = $session->get('user_id');
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="actplan.html">Activity Plan</a>
+                        <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="genreport.html">Generate Report</a>
+                        <a class="nav-link" href="/report">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/success">Success Stories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/lesson">Lesson Learned</a>
@@ -72,51 +78,6 @@ $user_id = $session->get('user_id');
             <?= session()->getFlashdata('pesan'); ?>
         </div>
     <?php endif ?>
-
-    <!--Tambah Project-->
-    <section id="tambahProject">
-        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#buatProject" data-bs-whatever="@mdo">
-            <i class="fas fa-plus"></i>
-            <p>New Lesson</p>
-        </button>
-        <div class="modal fade" id="buatProject" tabindex="-1" aria-labelledby="buatProjectLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="buatProjectLabel">New Project</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <!-- menambahkan lesson -->
-                        <form method="POST" action="/lesson/save">
-                            <?= csrf_field(); ?>
-                            <input type="hidden" name="created_by" value="<?= $user_id; ?>">
-                            <div class="mb-1">
-                                <label for="issues" class="col-form-label">Issues :</label>
-                                <input type="text" class="form-control" id="issues" name="lesson_issue" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="solution" class="col-form-label">Solution :</label>
-                                <input type="text" class="form-control" id="solution" name="lesson_solution" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="actionPlan" class="col-form-label">Action Plan :</label>
-                                <input type="text" class="form-control" id="actionPlan" name="lesson_action" required>
-                            </div>
-                            <div class="mb-1">
-                                <label for="actionPlan" class="col-form-label">Period :</label>
-                                <input type="text" class="form-control" id="actionPlan" name="lesson_period" required>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-danger">Add</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <div>
         <h1 class="text-end mb-3">
@@ -142,65 +103,18 @@ $user_id = $session->get('user_id');
                         <?php $i = 1; ?>
                         <?php foreach ($lesson as $p) : ?>
                             <tr>
-                                <th scope="row"><?= $i++; ?></th>
+                                <th scope="row">
+                                    <a class="detailProject" href="/lesson/detail/<?= $p['id']; ?>"><?= $i++; ?></a>
+                                </th>
                                 <td><?= $p['lesson_issue']; ?></td>
                                 <td><?= $p['lesson_solution']; ?></td>
                                 <td><?= $p['lesson_action']; ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-light me-3 text-start" data-bs-toggle="modal" data-bs-target="#editProfil" data-bs-whatever="@mdo">
-                                        Update
-                                    </button>
-                                    <div class="modal fade" id="editProfil" tabindex="-1" aria-labelledby="editProfilLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editProfilLabel">Update Lesson Learned</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <!-- update lesson -->
-                                                    <form method="POST" action="/lesson/update/<?= $p['id']; ?>">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="created_by" value="<?= $user_id; ?>">
-                                                        <div class="mb-1">
-                                                            <label for="issues" class="col-form-label">Issues :</label>
-                                                            <input type="text" class="form-control" id="issues" name="lesson_issue" required value="<?= $p['lesson_issue']; ?>">
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="solution" class="col-form-label">Solution :</label>
-                                                            <input type="text" class="form-control" id="solution" name="lesson_solution" required value="<?= $p['lesson_solution']; ?>">
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="actionPlan" class="col-form-label">Action Plan :</label>
-                                                            <input type="text" class="form-control" id="actionPlan" name="lesson_action" required value="<?= $p['lesson_action']; ?>">
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="actionPlan" class="col-form-label">Period :</label>
-                                                            <input type="text" class="form-control" id="actionPlan" name="lesson_period" required value="<?= $p['lesson_period']; ?>">
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-danger">Save</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form action="/lesson/<?= $p['id']; ?>" method="POST" class="d-inline">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Delete</button>
-                                    </form>
-
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
             </div>
-            </td>
-            </tr>
-        <?php endforeach ?>
-        </tbody>
-        </table>
         </div>
-    </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -22,6 +22,13 @@ class Project extends BaseController
         ];
         return view('project/index', $data);
     }
+    public function success()
+    {
+        $data = [
+            'project' => $this->projectModel->projectSuccess()
+        ];
+        return view('project/success', $data);
+    }
 
     //menampilkan detail proyek
     public function detail($id)
@@ -31,6 +38,15 @@ class Project extends BaseController
             'project' => $this->projectModel->detailProject($id)
         ];
         return view('project/detail', $data);
+    }
+    //menampilkan detail proyek sukes
+    public function detailSuccess($id)
+    {
+
+        $data = [
+            'project' => $this->projectModel->detailProject($id)
+        ];
+        return view('project/detailSuccess', $data);
     }
 
     //menghapus proyek

@@ -41,10 +41,13 @@
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="actplan.html">Activity Plan</a>
+                        <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/report">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/success">Success Stories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/lesson">Lesson Learned</a>
@@ -82,7 +85,7 @@
                             <tbody>
                                 <?php foreach ($project as $p) : ?>
                                     <tr>
-                                        <th scope="row"> <a class="detailProject" href="/project/detail/<?= $p['id']; ?>"><?= $p['project_name']; ?></a></th>
+                                        <th scope="row"> <a class="detailProject" href="/report/detail/<?= $p['id']; ?>"><?= $p['project_name']; ?></a></th>
                                         <td><?= $p['project_status']; ?></td>
                                     </tr>
                                 <?php endforeach ?>

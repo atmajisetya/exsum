@@ -31,7 +31,7 @@ $user_id = $session->get('user_id');
     <!--NAVBAR-->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <img src="/img/logo.png">
+            <img src="/img/logo_2.png">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -47,10 +47,13 @@ $user_id = $session->get('user_id');
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="actplan.html">Activity Plan</a>
+                        <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/report">Generate Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/project/success">Success Stories</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/lesson">Lesson Learned</a>
@@ -111,19 +114,25 @@ $user_id = $session->get('user_id');
                             </div>
                             <div class="mb-1">
                                 <label for="tanggal-mulai" class="col-form-label">Start Date :</label>
-                                <input type="text" class="form-control" id="tanggal-mulai" name="project_startdate" value="<?= old('project_startdate'); ?>" required>
+                                <input type="date" class="form-control" id="tanggal-mulai" name="project_startdate" value="<?= old('project_startdate'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="tanggal-selesai" class="col-form-label">Target Finish :</label>
-                                <input type="text" class="form-control" id="tanggal-selesai" name="project_finishtarget" value="<?= old('project_finishtarget'); ?>" required>
+                                <input type="date" class="form-control" id="tanggal-selesai" name="project_finishtarget" value="<?= old('project_finishtarget'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="unit-terlibat" class="col-form-label">Stakeholders :</label>
                                 <input type="text" class="form-control" id="unit-terlibat" name="project_stakeholders" value="<?= old('project_stakeholders'); ?>" required>
                             </div>
                             <div class="mb-1">
-                                <label for="resource" class="col-form-label">Resource :</label>
-                                <input type="text" class="form-control" id="resource" name="project_resource" value="<?= old('project_resource'); ?>" required>
+                                <label for="Resource" class="col-form-label">Resource</label>
+                                <select class="form-control" id="Resource" name="project_resource" required>
+                                    <option>-</option>
+                                    <option>Internal (organik)</option>
+                                    <option>Internal (Outsource)</option>
+                                    <option>External (Mitra)</option>
+                                    <option>Extrernal (Internship)</option>
+                                </select>
                             </div>
                             <div class="mb-1">
                                 <label for="progress" class="col-form-label">Progress :</label>

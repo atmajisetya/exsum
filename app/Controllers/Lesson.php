@@ -22,6 +22,15 @@ class Lesson extends BaseController
         ];
         return view('lesson/index', $data);
     }
+    //menampilkan detail Lesson
+    public function detail($id)
+    {
+
+        $data = [
+            'lesson' => $this->lessonModel->detailLesson($id)
+        ];
+        return view('lesson/detail', $data);
+    }
     public function save()
     {
         $session = session();
@@ -37,7 +46,8 @@ class Lesson extends BaseController
             'lesson_solution' => $this->request->getVar('lesson_solution'),
             'lesson_action' => $this->request->getVar('lesson_action'),
             'lesson_period' => $this->request->getVar('lesson_period'),
-            'created_by' => $this->request->getVar('created_by')
+            'created_by' => $this->request->getVar('created_by'),
+            'project_id' => $this->request->getVar('project')
         ]);
         session()->setFlashdata('pesan', 'Lesson Learned berhasil dibuat');
         return redirect()->to('/lesson');

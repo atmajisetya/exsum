@@ -36,6 +36,8 @@ $routes->get('/project', 'Project::index', ['filter' => 'auth']);
 $routes->get('/project/index', 'Project::index', ['filter' => 'auth']);
 $routes->delete('/project/(:num)', 'Project::delete/$1');
 $routes->delete('/lesson/(:num)', 'Lesson::delete/$1');
+$routes->delete('/activity/(:num)', 'Activity::delete/$1');
+$routes->delete('/om/(:num)', 'Om::delete/$1');
 
 /*
  * --------------------------------------------------------------------

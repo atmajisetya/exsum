@@ -19,4 +19,13 @@ class Report extends BaseController
         ];
         return view('report/index', $data);
     }
+    //menampilkan detail proyek
+    public function detail($id)
+    {
+
+        $data = [
+            'project' => $this->projectModel->detailProject($id)
+        ];
+        return view('report/detail', $data);
+    }
 }
