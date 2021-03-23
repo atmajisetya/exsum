@@ -104,7 +104,7 @@ $user_id = $session->get('user_id');
                         <?php foreach ($lesson as $p) : ?>
                             <tr>
                                 <th scope="row">
-                                    <a class="detailProject" href="/lesson/detail/<?= $p['id']; ?>"><?= $i++; ?></a>
+                                    <a class="detailProject" href="/lesson/detail/<?= $p['id']; ?>/<?= $p['project_id']; ?>"><?= $i++; ?></a>
                                 </th>
                                 <td><?= $p['lesson_issue']; ?></td>
                                 <td><?= $p['lesson_solution']; ?></td>

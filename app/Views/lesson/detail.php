@@ -81,13 +81,13 @@
             <div class="judul">
                 <h3 class="text-center">
                     <strong>
-                        Judul
+                        <?= $project['project_name']; ?>
                     </strong>
                 </h3>
             </div>
             <div class="desc text-center mt-2 mb-4">
                 <h4>
-                    Desc
+                    <?= $project['project_description']; ?>
                 </h4>
             </div>
             <div class="row" id="detail-project">

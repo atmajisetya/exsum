@@ -3,13 +3,16 @@
 namespace App\Controllers;
 
 use App\Models\LessonModel;
+use App\Models\ProjectModel;
 
 class Lesson extends BaseController
 {
     protected $lessonModel;
+    protected $projectModel;
     public function __construct()
     {
         $this->lessonModel = new LessonModel();
+        $this->projectModel = new ProjectModel();
     }
     public function index()
     {
@@ -23,11 +26,11 @@ class Lesson extends BaseController
         return view('lesson/index', $data);
     }
     //menampilkan detail Lesson
-    public function detail($id)
+    public function detail($id, $project_id)
     {
-
         $data = [
-            'lesson' => $this->lessonModel->detailLesson($id)
+            'lesson' => $this->lessonModel->detailLesson($id),
+            'project' => $this->projectModel->detailProject($project_id)
         ];
         return view('lesson/detail', $data);
     }
