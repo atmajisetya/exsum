@@ -37,9 +37,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/om">Operation Management</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>

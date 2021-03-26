@@ -8,7 +8,7 @@ class ActivityModel extends Model
 {
     protected $table = 'activities';
     protected $useTimestamps = true;
-    protected $allowedFields = ['activities_main', 'activities_submain', 'activities_objective', 'activities_progress', 'activities_status', 'activities_target',  'created_by'];
+    protected $allowedFields = ['activities_main', 'activities_submain', 'activities_objective', 'activities_period', 'activities_status', 'activities_target',  'created_by'];
 
     public function getActivity($user_id)
     {

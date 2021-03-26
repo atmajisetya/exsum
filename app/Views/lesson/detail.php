@@ -37,9 +37,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/om">Operation Management</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
@@ -103,11 +105,13 @@
                     <p><?= $lesson['lesson_action']; ?></p>
                     <p><?= $lesson['lesson_period']; ?></p>
                 </div>
+                <!--
                 <div class="mt-5">
                     <h6>
                         Status :
                     </h6>
                 </div>
+                -->
 
                 <div class="mt-5">
                     <button type="button" class="btn btn-light me-3 text-start" data-bs-toggle="modal" data-bs-target="#editProfil" data-bs-whatever="@mdo">

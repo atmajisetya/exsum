@@ -22,7 +22,7 @@ class Om extends BaseController
         ];
         return view('om/index', $data);
     }
-    //menampilkan detail proyek
+    //menampilkan detail OM
     public function detail($id)
     {
 
@@ -48,6 +48,7 @@ class Om extends BaseController
             'om_pic' => $this->request->getVar('om_pic'),
             'om_period' => $this->request->getVar('om_period'),
             'om_status' => $this->request->getVar('om_status'),
+            'om_progress' => $this->request->getVar('om_progress'),
             'created_by' => $this->request->getVar('created_by')
         ]);
         session()->setFlashdata('pesan', 'OM berhasil dibuat');
@@ -68,6 +69,7 @@ class Om extends BaseController
             'om_category' => $this->request->getVar('om_category'),
             'om_pic' => $this->request->getVar('om_pic'),
             'om_period' => $this->request->getVar('om_period'),
+            'om_progress' => $this->request->getVar('om_progress'),
             'om_status' => $this->request->getVar('om_status')
         ]);
         session()->setFlashdata('pesan', 'Data berhasil diubah');

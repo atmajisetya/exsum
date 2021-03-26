@@ -14,6 +14,39 @@
     <!--CSS-->
     <link rel="stylesheet" href="/css/styledashbord.css">
 
+    <!-- google chart -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['corechart']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+
+            <?php
+            $progress = $om['om_progress'];
+            $remaining = 100 - $progress;
+
+            ?>
+
+            var data = google.visualization.arrayToDataTable([
+                ['Completion', 'Percentage'],
+                ['Completed', <?= $progress ?>],
+                ['Remaining', <?= $remaining; ?>]
+            ]);
+
+            var options = {
+                title: 'OM Progress'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+            chart.draw(data, options);
+        }
+    </script>
+
+
     <!--font awesome-->
     <script src="https://kit.fontawesome.com/aee467f5c4.js" crossorigin="anonymous"></script>
 
@@ -37,9 +70,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/om">Operation Management</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
@@ -115,7 +150,7 @@
                 </div>
 
                 <div class="text-center mt-2">
-                    <img src="logo.png" id="ex">
+                    <div id="piechart" style="width: 700px; height: 300px;"></div>
                 </div>
 
                 <div class="mt-5">
@@ -162,6 +197,10 @@
                                         <div class="mb-1">
                                             <label for="status" class="col-form-label">Status :</label>
                                             <input type="text" class="form-control" id="status" name="om_status" required value="<?= $om['om_status']; ?>">
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="progress" class="col-form-label">Progress:</label>
+                                            <input type="text" class="form-control" id="progress" name="om_progress" required value="<?= $om['om_progress']; ?>">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

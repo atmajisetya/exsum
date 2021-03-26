@@ -43,9 +43,11 @@ $user_id = $session->get('user_id');
                     <li class="nav-item">
                         <a class="nav-link" href="/om">Operation Management</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
@@ -116,8 +118,12 @@ $user_id = $session->get('user_id');
                                 <input type="text" class="form-control" id="period" name="om_period" required>
                             </div>
                             <div class="mb-1">
-                                <label for="period" class="col-form-label">Status:</label>
+                                <label for="status" class="col-form-label">Status:</label>
                                 <input type="text" class="form-control" id="status" name="om_status" required>
+                            </div>
+                            <div class="mb-1">
+                                <label for="progress" class="col-form-label">Progress:</label>
+                                <input type="text" class="form-control" id="progress" name="om_progress" required>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

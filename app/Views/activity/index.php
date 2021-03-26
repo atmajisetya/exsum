@@ -42,9 +42,11 @@ $user_id = $session->get('user_id');
                     <li class="nav-item">
                         <a class="nav-link" href="/om">Operation Management</a>
                     </li>
+                    <!--
                     <li class="nav-item">
                         <a class="nav-link" href="actreport.html">Activity Report</a>
                     </li>
+                    -->
                     <li class="nav-item">
                         <a class="nav-link" href="/activity">Activity Plan</a>
                     </li>
@@ -86,7 +88,7 @@ $user_id = $session->get('user_id');
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="buatProjectLabel">New Project</h5>
+                        <h5 class="modal-title" id="buatProjectLabel">New Activity Plan</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -107,15 +109,21 @@ $user_id = $session->get('user_id');
                             </div>
                             <div class="mb-1">
                                 <label for="target" class="col-form-label">Target :</label>
-                                <input type="text" class="form-control" id="target" name="activities_target" value="<?= old('activities_target'); ?>" required>
+                                <input type="date" class="form-control" id="target" name="activities_target" value="<?= old('activities_target'); ?>" required>
                             </div>
                             <div class="mb-1">
-                                <label for="time" class="col-form-label">Time :</label>
+                                <label for="time" class="col-form-label">Period :</label>
                                 <input type="text" class="form-control" id="time" name="activities_period" value="<?= old('activities_period'); ?>" required>
                             </div>
                             <div class="mb-1">
                                 <label for="status" class="col-form-label">Status :</label>
-                                <input type="text" class="form-control" id="status" name="activities_status" value="<?= old('activities_status'); ?>" required>
+                                <select class="form-control" id="status" name="activities_status" value="<?= old('activities_status'); ?>" required>
+                                    <option>-</option>
+                                    <option>OnProgress</option>
+                                    <option>Done</option>
+                                    <option>Pending</option>
+                                    <option>Hold</option>
+                                </select>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -154,71 +162,20 @@ $user_id = $session->get('user_id');
                         <?php $i = 1; ?>
                         <?php foreach ($activity as $p) : ?>
                             <tr>
-                                <th scope="row"><?= $i++; ?></th>
+                                <th scope="row">
+                                    <a class="detailProject" href="/activity/detail/<?= $p['id']; ?>"><?= $i++; ?></a>
+                                </th>
                                 <td><?= $p['activities_main']; ?></td>
                                 <td><?= $p['activities_submain']; ?></td>
                                 <td><?= $p['activities_objective']; ?></td>
                                 <td><?= $p['activities_target']; ?></td>
                                 <td><?= $p['activities_status']; ?></td>
-                                <td>
-                                    <button type="button" class="btn btn-light me-3 text-start" data-bs-toggle="modal" data-bs-target="#editProfil" data-bs-whatever="@mdo">
-                                        Update
-                                    </button>
-                                    <div class="modal fade" id="editProfil" tabindex="-1" aria-labelledby="editProfilLabel" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editProfilLabel">Update Activity Plan</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <!-- update activity -->
-                                                    <form method="POST" action="/activity/update/<?= $p['id']; ?>">
-                                                        <?= csrf_field(); ?>
-                                                        <input type="hidden" name="created_by" value="<?= $user_id; ?>">
-                                                        <div class="mb-1">
-                                                            <label for="main-program" class="col-form-label">Main Program:</label>
-                                                            <input type="text" class="form-control" id="main-program" name="activities_main" value="<?= $p['activities_main']; ?>" required>
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="activity" class="col-form-label">Activity :</label>
-                                                            <input type="text" class="form-control" id="activity" name="activities_submain" value="<?= $p['activities_submain']; ?>" required>
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="objective" class="col-form-label">Objective :</label>
-                                                            <input type="text" class="form-control" id="objective" name="activities_objective" value="<?= $p['activities_objective']; ?>" required>
-                                                        </div>
-                                                        <div class="mb-1">
-                                                            <label for="target" class="col-form-label">Target :</label>
-                                                            <input type="text" class="form-control" id="target" name="activities_target" value="<?= $p['activities_target']; ?>" required>
-                                                        </div>
-
-                                                        <div class="mb-1">
-                                                            <label for="status" class="col-form-label">Status :</label>
-                                                            <input type="text" class="form-control" id="status" name="activities_status" value="<?= $p['activities_status']; ?>" required>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                            <button type="submit" class="btn btn-danger">Save</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <form action="/activity/<?= $p['id']; ?>" method="POST" class="d-inline">
-                                        <?= csrf_field(); ?>
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn btn-danger" onclick="return confirm('apakah anda yakin?');">Delete</button>
-                                    </form>
+                            </tr>
+                        <?php endforeach ?>
+                    </tbody>
+                </table>
             </div>
-            </td>
-            </tr>
-        <?php endforeach ?>
-        </tbody>
-        </table>
         </div>
-    </div>
     </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

@@ -22,6 +22,15 @@ class Activity extends BaseController
         ];
         return view('activity/index', $data);
     }
+    //menampilkan detail Activity
+    public function detail($id)
+    {
+
+        $data = [
+            'activity' => $this->activityModel->detailActivity($id)
+        ];
+        return view('activity/detail', $data);
+    }
 
     public function save()
     {
@@ -38,6 +47,7 @@ class Activity extends BaseController
             'activities_objective' => $this->request->getVar('activities_objective'),
             'activities_target' => $this->request->getVar('activities_target'),
             'activities_status' => $this->request->getVar('activities_status'),
+            'activities_period' => $this->request->getVar('activities_period'),
             'created_by' => $this->request->getVar('created_by')
         ]);
         session()->setFlashdata('pesan', 'Activity Plan berhasil dibuat');
@@ -56,6 +66,7 @@ class Activity extends BaseController
             'activities_submain' => $this->request->getVar('activities_submain'),
             'activities_objective' => $this->request->getVar('activities_objective'),
             'activities_target' => $this->request->getVar('activities_target'),
+            'activities_period' => $this->request->getVar('activities_period'),
             'activities_status' => $this->request->getVar('activities_status')
         ]);
         session()->setFlashdata('pesan', 'Activity berhasil diubah');
